@@ -10,7 +10,7 @@ Claude Code 使ってると、`✢ なんたらing…` ってよく見ますよ�
 
 しかもこの待機文言には結構な種類があり、どれも遊び心が感じられます。
 
-![caramelizing](images/cc-flavors/caramelizing.png)
+![caramelizing](/images/cc-flavors/caramelizing.png)
 _急にキャラメリゼしだすClaude Code氏_
 
 今まで出会ったこいつらをコレクションしてみたい...。
@@ -23,7 +23,7 @@ https://github.com/takymt/cc-flavors
 
 実際に動かしてみるとこんな感じです
 
-![cc-flavors_demo](images/cc-flavors/demo.png)
+![cc-flavors_demo](/images/cc-flavors/demo.png)
 _今まで出会ったフレーバーテキストをカウントできる_
 
 構成はちょっと力技ですが、
