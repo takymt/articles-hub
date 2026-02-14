@@ -1,5 +1,5 @@
 ---
-title: 'Claude Code の ✢ Moonwalking… みたいな待機文言のコレクションを作ろう！'
+title: 'Claude Code の ✢ Moonwalking… みたいな待機文言を集計して見返そう！'
 emoji: '🗃️'
 type: 'tech'
 topics: ['claudecode', 'claude', 'golang', 'tmux', 'golang']
