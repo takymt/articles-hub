@@ -2,7 +2,7 @@
 title: 'Claude Code の ✢ Moonwalking… みたいな待機文言を集計して見返そう！'
 emoji: '🗃️'
 type: 'tech'
-topics: ['claudecode', 'claude', 'golang', 'tmux', 'golang']
+topics: ['claudecode', 'claude', 'golang', 'tmux']
 published: true
 ---
 
