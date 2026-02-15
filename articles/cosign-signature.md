@@ -3,12 +3,8 @@ title: 'sigstore/cosign でGPG鍵の管理から解放される'
 emoji: '🔑'
 type: 'tech'
 topics: ['cosign', 'signature', 'gpg', 'sigstore']
-published: false
+published: true
 ---
-
-この記事では [sigstore/cosign](https://github.com/sigstore/cosign) を使用して鍵管理不要な署名を実現する方法と仕組みを解説します。
-
-https://github.com/sigstore/cosign
 
 ## なんの話？
 
@@ -19,11 +15,13 @@ https://github.com/sigstore/cosign
 - いつ誰が署名したか？
 
 これらを検証可能にするために、従来は [GPG](https://www.gnupg.org/) を用いる手法が主流でした。
-近年は [Cosign](https://github.com/sigstore/cosign) という手法が台頭してきているようです。
+近年は Cosign という手法が台頭してきているようです。
+
+https://github.com/sigstore/cosign
 
 ## GPGの課題
 
-GPG は OpenPGP 互換のオープンソース実装であり、 PGP の鍵モデルに依存します。[\_ref](https://www.gnupg.org/)
+GPG は OpenPGP 互換のオープンソース実装であり、 PGP の鍵モデルに依存します。^[https://www.gnupg.org/]
 ここからは PGP 方式の既知の課題を挙げていきます。なんとなく知ってる方はスキップで OK。
 
 ### 長期鍵管理モデルの構造的な問題
@@ -33,7 +31,7 @@ PGP の鍵モデルには以下の特徴があり、「長く使うほど信頼�
 - 事実上永久のルート鍵を自身のアイデンティティとして保管する
 - 分散信頼システムである `Web of Trust (信頼の輪)` に基づいており、他の誰かに署名されることでアイデンティティの信頼を積み上げる
 
-しかしながら、当然クレデンシャルには常に漏洩の可能性があります。そして、長く使えば使うほど、その可能性は高まります。たとえ [Yubikey](https://www.yubico.com/yubikey/?lang=ja) のような PGP 鍵管理ツールを使用していたとしても、絶対に漏洩しない保証はありません。当時 PGP コミュニティに所属していた Fillipo Valsorda ですら、この構造的問題を内部から痛烈に批判しています。 [\_ref](https://words.filippo.io/giving-up-on-long-term-pgp/)
+しかしながら、当然クレデンシャルには常に漏洩の可能性があります。そして、長く使えば使うほど、その可能性は高まります。たとえ [Yubikey](https://www.yubico.com/yubikey/?lang=ja) のような PGP 鍵管理ツールを使用していたとしても、絶対に漏洩しない保証はありません。当時 PGP コミュニティに所属していた Fillipo Valsorda ですら、この構造的問題を内部から痛烈に批判しています。 ^[https://words.filippo.io/giving-up-on-long-term-pgp/]
 
 他にも Python エコシステムの例では、[PEP-761](https://peps.python.org/pep-0761/) で Python アーティファクトの署名に PGP 署名を使用しないようにする仕様が規定されており、リリース管理者が7年以上もの間秘密鍵を保有しつづけるのは不適当だとしています。
 
@@ -45,14 +43,14 @@ PGP の鍵モデルには以下の特徴があり、「長く使うほど信頼�
 前方秘匿性とは「仮に秘密鍵が侵害されても過去の内容は復元できない」性質のことで、 TLS などで用いられる[楕円 Diffie–Hellman 鍵交換](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman)がその代表例です。
 
 しかしながら PGP の仕様にこの性質は規定されていません。つまり一度長期鍵が漏洩してしまえば、過去の暗号化内容が全て復号できてしまうことになります。
-もちろん PGP ツールでも、セッション鍵と長期鍵を使い分けることで前方秘匿性を模倣することはできますが、実際にそこまでやるユーザはほとんどいないことが指摘されています [\_rel](https://www.latacora.com/blog/2019/07/16/the-pgp-problem/#no-forward-secrecy)
+もちろん PGP ツールでも、セッション鍵と長期鍵を使い分けることで前方秘匿性を模倣することはできますが、実際にそこまでやるユーザはほとんどいないことが指摘されています ^[https://www.latacora.com/blog/2019/07/16/the-pgp-problem/#no-forward-secrecy]
 
 ### Web Of Trust (信頼の輪) が機能しない
 
 PGP 仕様は `Web of Trust (信頼の輪)` に基づいた分散信頼システムですが、実際には
 
-- 鍵を信頼すべきかどうかの正確な判断は専門家でも難しいため、結局多くのユーザが中央集権的な権威を信頼の基準にしている[\_rel](https://www.latacora.com/blog/2019/07/16/the-pgp-problem/#incoherent-identity)
-- そもそも署名してくれる人が少ない( Fillipo Valsorda の場合は年2回程度[\_rel](https://words.filippo.io/giving-up-on-long-term-pgp/))
+- 鍵を信頼すべきかどうかの正確な判断は専門家でも難しいため、結局多くのユーザが中央集権的な権威を信頼の基準にしている^[https://www.latacora.com/blog/2019/07/16/the-pgp-problem/#incoherent-identity]
+- そもそも署名してくれる人が少ない( Fillipo Valsorda の場合は年2回程度^[https://words.filippo.io/giving-up-on-long-term-pgp/])
 
 といった課題があり、見せかけの分散システムだと批判されることがあるようです。
 
@@ -64,28 +62,109 @@ PGP 仕様は `Web of Trust (信頼の輪)` に基づいた分散信頼システ
 
 ## Cosignが解決すること
 
-### Keyless署名
+Cosign はこれらの PGP における課題を直接的/間接的に解消することができます
 
-### ログ公開(Rekor)による透明化
-
-### コンテナ/CIフレンドリー
+- **キーレス(Keyless)署名**: OIDC認証＋短命証明書で都度署名が可能（秘密鍵の長期保管不要）
+- **ログ公開による透明化**: 署名をログ台帳に記録し、不正署名や改ざんを検知
+- **コンテナ/CIフレンドリー**: 一時的な実行環境での自動署名が可能（CIでの鍵管理不要）
 
 ## Cosignの仕組み
 
-### Keylessフロー
+https://docs.sigstore.dev/about/tooling/
 
-### Fulcio（証明書発行）
+https://docs.sigstore.dev/about/security/
 
-### Rekor（透明ログ）
+### Keyless署名/検証フロー
 
-### Cosign CLI
+```mermaid
+sequenceDiagram
+    participant Dev as 開発者 / CI
+    participant Cosign
+    participant OIDC as OIDC プロバイダ (例: GitHub)
+    participant Fulcio as Fulcio (CA)
+    participant Rekor as Rekor (透明化ログ)
+    participant Registry as OCI レジストリ
+
+    Dev->>Cosign: $ cosign sign <image>
+    Cosign->>OIDC: OIDC 認証フロー
+    OIDC-->>Cosign: ID トークン
+
+    Cosign->>Cosign: エフェメラルなキーペアを生成
+
+    Cosign->>Fulcio: IDトークンで証明書をリクエスト
+    Fulcio->>OIDC: トークン検証依頼
+    OIDC-->>Fulcio: 「トークンは有効」
+    Fulcio-->>Cosign: 短命証明書発行
+
+    Cosign->>Cosign: イメージダイジェストに署名
+
+    Cosign->>Rekor: ログエントリ(署名/ダイジェスト/証明書等)
+    Rekor-->>Cosign: ログエントリ追加証明(inclusion proof)
+
+    Cosign->>Registry: 署名オブジェクト
+    Registry-->>Cosign: 保存完了
+
+    Note over Dev,Registry: 署名完了
+
+    Dev->>Cosign: $ cosign verify
+    Cosign->>Registry: 署名と証明書を取得
+    Registry-->>Cosign: 署名と証明書
+    Cosign->>Cosign: 署名がダイジェストに対応するか確認
+    Cosign->>Cosign: 証明書検証 by Trust Root
+    Cosign->>Rekor: 透明ログを照合
+    Rekor-->>Cosign: ログ証明情報(SET/inclusion proof)
+    Cosign->>Cosign: 署名時刻が証明書有効期間内か確認
+    Cosign-->>Dev: 「署名は有効」
+
+    Note over Dev,Registry: 署名検証完了
+```
+
+### Trust Root
+
+- 多様な企業/学術団体から選ばれた 5 名の鍵管理者の総称
+- Fulcio の証明書や Rekor のログエントリを、Trust Root を使って検証可能
+
+### Fulcio（CA）
+
+- Cosign CLI が生成したキーペアに対し短命な X.509 証明書を発行する CA
+- CA 証明書は Trust Root によって署名されている
+- CA 証明書はログとして公開されるため、ユーザはログにある証明書のみを信頼できる
+
+### Rekor（ログ基盤）
+
+- 署名/イメージダイジェスト/証明書を含むログエントリを保存
+- 追記専用(append-only)、改ざん不可(=Merkle Inclusion Proof)
+- ログエントリは Trust Root によって署名されている
+
+#### Merkle Inclusion Proof
+
+![Merkle Tree](/images/cosign-signature/merkle-tree.png)
+_[Wikipedia - Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree)_
+
+- [ブロックチェーン技術としても知られる Merkle Tree](https://bitcoin.org/files/bitcoin-paper/bitcoin_jp.pdf) を活用したログ改ざん検知
+- 子ノードのハッシュをまとめて親ノードのハッシュが作られる
+- 表 `hash(L1)`, `hash(L2)`, `hash(L3)`, `L4` が与えられたとき、計算によって得られる Top Hash と実際の Top Hash が一致していれば `hash(L4)` が木構造に含まれていることがわかる (= Merkle Inclusion Proof)
+- Rekorの場合は、 Rekor がログエントリ自身とそれ以外のハッシュ値を返却することで、実際にログが保存されたかを検証できる
 
 ## Cosignの課題
 
-### Sigstore依存
+そんなモダンで CI フレンドリーな署名モデルの Cosign ですが、
 
-### 中央集権な信頼モデル
+- 中央集権への回帰
+  - PGP のメリットであった分散性を失い、 Sigstore のエコシステムに依存することになる
+- ユーザ負荷の高い運用
+  - 主要コンポーネントを制御するための理解コストを払う必要がある
+  - ログ監視を自前で回さないと不正発行の検知が遅れる
 
-### 学習コスト
+といった側面もあるでしょう。
+とはいえ、既存PGPエコシステムの課題と天秤にかけるほどではないのかもしれません。
 
 ## 終わりに
+
+自作アプリ開発の過程で気になった、Cosign 署名モデルについてざっくり調べてみました。
+
+個人的には、何でこんな自然に思えるモデルが今までなかったんだろうという疑問を抱きました (k8s や CICD の台頭とか、インフラ発展とか、色々あるのかな)
+
+ともかく、GPG 限らずキーペアの管理には前々から嫌気が差していたので、今後もお世話になるんだろうなと思います。
+
+ありがとう sigstore、ありがとう CNCF...！
