@@ -112,6 +112,10 @@ signs:
 今回は定番のGPGではなく、[cosign](https://github.com/sigstore/cosign) という手法を使用しています。
 cosignについてはそのうち別の記事で解説したいですが、ざっくり言うとOIDCベースのKeylessな証明方法であり、GPGのように鍵を管理する必要がないのが大きなメリットです。
 
+（追記）書きました
+
+https://zenn.dev/hiruno_tarte/articles/cosign-signature
+
 ### SBOM
 
 `sbom`セクションで 生成アーカイブごとにSBOMを作っています。
