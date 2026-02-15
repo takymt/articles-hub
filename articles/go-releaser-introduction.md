@@ -6,7 +6,7 @@ topics: ['golang', 'githubactions', 'cicd']
 published: true
 ---
 
-先日、Goの処女作として Claude Code の `✢ Moonwalking…` みたいなアレを集計する [cc-flavors](https://github.com/takymt/cc-flavors) というツールを作成したのですが、その際に使ったGo Releaser が非常に便利だったので紹介しようと思います
+先日、Goの処女作として [cc-flavors](https://github.com/takymt/cc-flavors) というツールを作成したのですが、その際に使ったGo Releaser が非常に便利だったので紹介しようと思います
 
 https://zenn.dev/hiruno_tarte/articles/cc-flavors-introduction
 
@@ -20,7 +20,7 @@ https://goreleaser.com/
 - Homebrew / Docker / Scoop などのパッケージマネジャーへの公開
 - GPGやcosignでの署名
 
-を設定ファイル `.goreleaser.yaml` 一つで実施してくれる便利ツールです。
+を設定ファイル `.goreleaser.yaml` 一つで宣言的に設定・実施できる便利ツールです。
 
 この記事では、[実際に自分が使用している設定](https://github.com/takymt/cc-flavors/blob/main/.goreleaser.yaml) を題材に、Go Releaser のラクさを紹介します。
 
@@ -136,6 +136,16 @@ release:
     owner: takymt
     name: cc-flavors
 ```
+
+### GitHub Actions
+
+https://goreleaser.com/ci/actions/
+
+release用のactionを設定しておきましょう
+
+上記の設定であれば、`Go` / `cosign` / `syft`(SBOM生成用) をインストールして `goreleaser` を実行すればOKです。
+
+[設定例](https://github.com/takymt/cc-flavors/blob/main/.github/workflows/release.yml)
 
 ## おわりに
 
