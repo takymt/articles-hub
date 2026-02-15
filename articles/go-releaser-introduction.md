@@ -6,7 +6,7 @@ topics: ['golang', 'githubactions', 'cicd']
 published: true
 ---
 
-先日、Goの処女作として [cc-flavors](https://github.com/takymt/cc-flavors) というツールを作成したのですが、その際に使ったGo Releaser が非常に便利だったので紹介しようと思います
+先日、Go学習の習作として [cc-flavors](https://github.com/takymt/cc-flavors) というツールを作成したのですが、その際に使ったGo Releaser が非常に便利だったので紹介しようと思います
 
 https://zenn.dev/hiruno_tarte/articles/cc-flavors-introduction
 
