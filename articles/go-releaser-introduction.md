@@ -1,5 +1,5 @@
 ---
-title: 'Go Releaser が便利だったので紹介する'
+title: 'Go Releaser がリリース配布物を宣言的に定義できて便利だったので紹介する'
 emoji: '🚀'
 type: 'tech'
 topics: ['golang', 'githubactions', 'cicd']
