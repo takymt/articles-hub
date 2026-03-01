@@ -45,6 +45,6 @@ keybind = super+shift+backslash=next_tab
 
 ## まとめ
 
-というわけで、Ghostty のキーバインドが上手く動かないときは Terminal Inspector を見てみましょう〜！
+というわけで、Ghostty (のキーバインド) が上手く動かないときは Terminal Inspector を見てみましょう〜！
 
 にしても、こういうことがあるとUSキー使ってみたくなりますね。
