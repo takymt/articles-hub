@@ -12,17 +12,14 @@ Ghostty のキーバインドを設定してた時にちょっと詰まったの
 
 Ghostty のタブ切り替えを macOS でよくある `cmd` + `shift` + `[` or `]` にしたかったのですが、
 
-```conf:config
-# うまくいかなかった設定(super は cmd 相当)
+```conf
 keybind = super+shift+left_bracket=previous_tab
 keybind = super+shift+right_bracket=next_tab
-keybind = super+left_bracket=goto_split:previous
-keybind = super+right_bracket=goto_split:next
 ```
 
 あれ？
 
-`super+shift+left_bracket` と `super+left_bracket` は動くのに、`super+shift+right_bracket` と `super+right_bracket` は動かない...。
+`previous_tab` は動くのに、`next_tab` は動かない...。
 
 ## 原因
 
@@ -38,12 +35,10 @@ _Terminal Inspector 機能で `]` キーを叩いてみる_
 
 というわけで正しい設定はこんな感じでした。
 
-```conf:config
+```conf:$XDG_CONFIG_HOME/.config/ghostty/config
 # For JIS layout
 keybind = super+shift+left_bracket=previous_tab
 keybind = super+shift+backslash=next_tab
-keybind = super+left_bracket=goto_split:previous
-keybind = super+backslash=goto_split:next
 ```
 
 （他の ghostty 設定については [takymt/dotfiles](https://github.com/takymt/dotfiles/blob/main/dot_config/ghostty/config) にて公開しています）
@@ -53,5 +48,3 @@ keybind = super+backslash=goto_split:next
 というわけで、Ghostty のキーバインドが上手く動かないときは Terminal Inspector を見てみましょう〜！
 
 にしても、こういうことがあるとUSキー使ってみたくなりますね。
-
-以上、小ネタでした！
