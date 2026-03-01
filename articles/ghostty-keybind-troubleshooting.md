@@ -2,8 +2,8 @@
 title: 'Ghostty のキーバインドが動かないときは Terminal Inspecter を見よう'
 emoji: '👻'
 type: 'tech'
-topics: ['ghostty', 'cli']
-published: false
+topics: ['ghostty', 'cli', 'dotfiles', 'keybinding']
+published: true
 ---
 
 Ghostty のキーバインドを設定してた時にちょっと詰まったので小ネタをメモ
