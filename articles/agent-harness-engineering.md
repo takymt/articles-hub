@@ -4,7 +4,7 @@ emoji: '🐴'
 type: 'tech'
 topics: ['harness', 'codex', 'ai', 'ai駆動開発']
 published: true
-published_at: 2026-02-04 08:00
+published_at: 2026-03-04 08:00
 ---
 
 最近、ハーネスエンジニアリングという言葉をよく耳にします。
@@ -91,7 +91,7 @@ UI の場合は、
 - Chrome DevTools MCP をエージェントの実行環境に埋め込み、アプリの画面を操作できるようにした
 - DOM スナップショット、スクショ、画面遷移等をスキル化した
 
-![codex-with-chrome-devtools-mcp](/images/harness-engineering/codex-with-chrome-devtools-mcp.png)
+![codex-with-chrome-devtools-mcp](/images/agent-harness-engineering/codex-with-chrome-devtools-mcp.png)
 
 オブザーバビリティ の場合は、
 
@@ -99,7 +99,7 @@ UI の場合は、
 - Codex は [LogQL](https://grafana.com/docs/loki/latest/query/) や [PromQL](https://prometheus.io/docs/prometheus/latest/querying/basics/) といったクエリ言語を用いて、調査・改善を行う
 - 性能や信頼性についての指示が実行可能になる (e.g. 起動が800ms以内で終わることを保証して)
 
-![codex-with-o11y-stack](/images/harness-engineering/codex-with-o11y-stac.png)
+![codex-with-o11y-stack](/images/agent-harness-engineering/codex-with-o11y-stac.png)
 
 といった調子で、worktree ごとに隔離されたアプリ+観測データに対して Codex が作業できるようにしていたとのこと。
 
@@ -173,7 +173,7 @@ AIの把握可能性を確保するために、ひたすらにリポジトリに
 - [エージェントは厳格な境界 (boundaries) と予測可能な型構造の上で上手く動作する](https://bits.logic.inc/p/ai-is-forcing-us-to-write-good-code) ので、各ビジネスドメインのアーキテクチャ層を固定し、各層の依存の方向性を厳格に制御する。
 - これらの制約 (constraints) を専用のリンタとテストで機械的に判定する
 
-![layered-architecture-with-explicit-boundaries](/images/harness-engineering/layered-architecture-with-explicit-boundaries.png)
+![layered-architecture-with-explicit-boundaries](/images/agent-harness-engineering/layered-architecture-with-explicit-boundaries.png)
 
 非常に厳格にレイヤードされた構造になっていますが、曰く、
 
