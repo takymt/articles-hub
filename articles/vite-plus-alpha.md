@@ -3,8 +3,7 @@ title: 'vite+を試してみる！'
 emoji: '⚡️'
 type: 'tech'
 topics: ['vite', 'typescript', 'rolldown', 'oxlint', 'oxfmt']
-published: true
-published_at: 2026-03-15 09:00
+published: false
 ---
 
 2026年3月13日、ついに[Vite Plus](https://viteplus.dev/)が Alpha リリースされましたね。
@@ -211,9 +210,7 @@ pass: Found no warnings, lint errors, or type errors in 7 files (213ms, 8 thread
   - [`eslint` との併用パターン](https://oxc.rs/docs/guide/usage/linter/migrate-from-eslint.html#running-oxlint-and-eslint-together) もあるが、eslint 専用ルールがボトルネックだと改善幅は小さい
   - type-aware なルールについては TypeScript 7.0+ が前提とされているので、TS 6 以下 (つまり現行のほとんど) のプロジェクトにとっては移行コストがまだ大きい
     - 一応 `baseUrl` などの一部のレガシー設定を使用しなければ動きはするっぽい
-
-`vp check` ツール全体としても、まだまだ時期尚早だとは思いました。
-TS 7 が安定するころにはデファクトになってるかもしれませんね！
+- `vp-check` 自体
 
 ### テスト
 
