@@ -1,14 +1,14 @@
 ---
-title: 'vite+を試してみる！'
+title: '【Alpha版】vite+を試してみる！【VoidZero帝国】'
 emoji: '⚡️'
 type: 'tech'
 topics: ['vite', 'viteplus', 'typescript', 'vitest', 'oxc']
 published: true
 ---
 
-2026年3月13日、ついに[Vite Plus](https://viteplus.dev/)が Alpha リリースされましたね。
+2026年3月13日、ついに [VoidZero](https://voidzero.dev/) から [Vite Plus](https://viteplus.dev/) が Alpha リリースされましたね。
 
-しかも事前のプレスとは異なり、なんとMITオープンソースでの発表でした。
+しかも事前のプレスとは異なり、なんと MIT ライセンスでの発表でした。
 
 https://www.youtube.com/watch?v=AJxH3Gvb-PU
 
@@ -19,12 +19,12 @@ https://www.youtube.com/watch?v=AJxH3Gvb-PU
 
 https://voidzero.dev/posts/announcing-vite-plus-alpha#what-is-vite
 
-- Vite, Vitest, Oxlint, Oxfmt, Rolldown, tsdownを統合したツールチェーン
+- Vite, Vitest, Oxlint, Oxfmt, Rolldown, tsdown を統合したツールチェーン
 - 新たなタスクランナー[Vite Task](https://github.com/voidzero-dev/vite-task)も同梱
-- Rust製で高速
-  - Vite + Rolldown: RollupベースのVite 7よりも最大1.6-7.7倍高速な商用ビルド
-  - Oxlint: ESLintよりも最大50-100倍高速なESLint互換リンター
-  - Oxfmt: Prettierよりも最大30倍高速なPrettier互換フォーマッタ
+- Rust 製で高速
+  - Vite + Rolldown: Rollup ベースの Vite 7 よりも最大 1.6-7.7 倍高速な商用ビルド
+  - Oxlint: ESLint よりも最大 50-100 倍高速な ESLint 互換リンター
+  - Oxfmt: Prettier よりも最大 30 倍高速な Prettier 互換フォーマッタ
 
 ## さわってみよう
 
