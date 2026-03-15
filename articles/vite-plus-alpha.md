@@ -1,5 +1,5 @@
 ---
-title: '【Alpha版】vite+を試してみる！【VoidZero帝国】'
+title: '【Alpha版】Vite+ を試してみる！【VoidZero帝国】'
 emoji: '⚡️'
 type: 'tech'
 topics: ['vite', 'viteplus', 'typescript', 'vitest', 'oxc']
