@@ -3,7 +3,7 @@ title: 'vite+を試してみる！'
 emoji: '⚡️'
 type: 'tech'
 topics: ['vite', 'typescript', 'rolldown', 'oxlint', 'oxfmt']
-published: false
+published: true
 ---
 
 2026年3月13日、ついに[Vite Plus](https://viteplus.dev/)が Alpha リリースされましたね。
@@ -65,6 +65,8 @@ Tool Paths:
 ```
 
 このあたりの設定は `$HOME/.vite-plus/bin` に保存されるようです。
+
+（XDG 対応関連の [PR](https://github.com/voidzero-dev/vite-plus/pull/892) / [Issue](https://github.com/voidzero-dev/vite-plus/issues/827) が出てますね）
 
 ### プロジェクト作成
 
@@ -185,6 +187,11 @@ VITE+ - The Unified Toolchain for the Web
 pass: All 19 files are correctly formatted (205ms, 8 threads)
 pass: Found no warnings, lint errors, or type errors in 7 files (213ms, 8 threads)
 ```
+
+type-aware なリントと typecheck を一回の実行でできるようになるのは良いですね(vite plus というよりは tsgolint のアイデアですが)
+
+また、単体ツールをそれぞれ実行するよりも速いらしいです。
+typecheck が lint に畳み込まれているのと、config 読み込みを共有できているのが大きいんでしょうか。
 
 #### 現時点での互換性
 
@@ -321,5 +328,7 @@ Alpha 時点の Vite Plus を触ってみたまとめです。
 - 既存互換ツールと比較するとどれも非常に高速で開発体験がいい
 - `vp staged` やタスクランナーなど、かゆいところに手が届く
 - まだ Alpha なので当然だが、商用で使えるほど安定ではない (特に oxlint や tsgolint)
-- 個人的にはツール乱立の現状にそこまで課題感を感じてなかったので、`.oxfmtrc.json` とかを作ってくれる方が嬉しかった感もある(剥がしにくい)
-- [この手のツールは過去にもあった](https://github.com/rome/tools) が挫折した。期待する方は是非コントリビュートでの持続可能性支援を！
+
+個人的には、ツール乱立の現状にそこまで課題感を感じてなかったので、`.oxfmtrc.json` とかを作ってくれる方が嬉しかった感もあります。あるいは現時点で自分にとって真に効用となっているのは各ツールの進化であり、Vite Plus という統一化された抽象ではないかもしれません。
+
+ただ構想自体は凄い良いなと思いますし、実際ツールチェーンが公式から統一化されている Go や Deno の開発体験は凄く好きなので、折をみて貢献していければと思います！Alpha で盛り上がり過ぎ感は否めないですが、[Rome](https://github.com/rome/tools) の二の舞にならないよう、持続可能性のための十分な支援が集まってほしいですね！
